@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.jiyoung.idiustest.model.DataItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <View
+            android:id="@+id/line_vertical_1"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#bdbdbd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_weather_city"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_weather_city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{item.item.title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/line_vertical_2"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/line_vertical_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line_vertical_2"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#bdbdbd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_today"
+            app:layout_constraintStart_toEndOf="@id/tv_weather_city"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_today"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/line_vertical_3"
+            app:layout_constraintHorizontal_weight="4"
+            app:layout_constraintStart_toEndOf="@id/line_vertical_2"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_today_src"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guideline_today"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:setWeatherIcon="@{item.state.consolidatedWeather.get(0).weatherStateAbbr}" />
+
+            <TextView
+                android:id="@+id/tv_today_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{item.state.consolidatedWeather.get(0).weatherStateName}"
+                app:layout_constraintBottom_toTopOf="@id/tv_today_temp"
+                app:layout_constraintStart_toStartOf="@id/guideline_today"
+                app:layout_constraintTop_toTopOf="@id/iv_today_src" />
+
+            <TextView
+                android:id="@+id/tv_today_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                bind:setTemperature="@{item.state.consolidatedWeather.get(0).theTemp}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_today_src"
+                app:layout_constraintStart_toStartOf="@id/guideline_today"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_state" />
+
+            <TextView
+                android:id="@+id/tv_today_hmdt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                bind:setHumidity="@{item.state.consolidatedWeather.get(0).humidity}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_today_src"
+                app:layout_constraintStart_toEndOf="@id/tv_today_temp"
+                app:layout_constraintTop_toBottomOf="@id/tv_today_state" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/line_vertical_3"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#bdbdbd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_tomorrow"
+            app:layout_constraintStart_toEndOf="@id/layout_today"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_tomorrow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/line_vertical_4"
+            app:layout_constraintHorizontal_weight="4"
+            app:layout_constraintStart_toEndOf="@id/line_vertical_3"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_tomorrow_src"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guideline_tomorrow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:setWeatherIcon="@{item.state.consolidatedWeather.get(1).weatherStateAbbr}" />
+
+            <TextView
+                android:id="@+id/tv_tomorrow_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{item.state.consolidatedWeather.get(1).weatherStateName}"
+                app:layout_constraintBottom_toTopOf="@id/tv_tomorrow_temp"
+                app:layout_constraintStart_toStartOf="@id/guideline_tomorrow"
+                app:layout_constraintTop_toTopOf="@id/iv_tomorrow_src" />
+
+            <TextView
+                android:id="@+id/tv_tomorrow_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                bind:setTemperature="@{item.state.consolidatedWeather.get(1).theTemp}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_tomorrow_src"
+                app:layout_constraintStart_toStartOf="@id/guideline_tomorrow"
+                app:layout_constraintTop_toBottomOf="@id/tv_tomorrow_state" />
+
+            <TextView
+                android:id="@+id/tv_tomorrow_hmdt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                bind:setHumidity="@{item.state.consolidatedWeather.get(1).humidity}"
+                app:layout_constraintBottom_toBottomOf="@id/iv_tomorrow_src"
+                app:layout_constraintStart_toEndOf="@id/tv_tomorrow_temp"
+                app:layout_constraintTop_toBottomOf="@id/tv_tomorrow_state" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_tomorrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/line_vertical_4"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#bdbdbd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/layout_tomorrow"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#bdbdbd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

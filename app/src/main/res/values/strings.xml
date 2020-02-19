@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">IdiusTest</string>
+    <string name="header_local">Local</string>
+    <string name="header_today">Today</string>
+    <string name="header_tomorrow">Tomorrow</string>
+    <string name="main_local_weather">Local Weather</string>
+</resources>
